@@ -1,11 +1,80 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Social Media Performance Analysis</title>
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #0073e6;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+        }
+
+        header nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            padding: 0.75rem 1.5rem;
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #333;
+            color: white;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+            margin: 1rem 0;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -13,18 +82,89 @@
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="upload.html">Upload Data</a></li>
-                <li><a href="analysis.html">Analysis</a></li>
-                <li><a href="about.html">About</a></li>
+                <li><a href="#upload-section">Upload Data</a></li>
+                <li><a href="#analysis-section">Analysis</a></li>
+                <li><a href="#insights-section">Insights</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <h2>Welcome to Social Media Analyzer</h2>
-        <p>Analyze your social media performance with ease. Navigate through the menu to upload data, view analysis, and learn more about the tool.</p>
+        <section id="upload-section">
+            <h2>Upload Engagement Data</h2>
+            <form id="dataUploadForm">
+                <input type="file" id="dataFile" accept=".csv" required>
+                <button type="submit">Upload</button>
+            </form>
+        </section>
+
+        <section id="analysis-section">
+            <h2>Performance Analysis</h2>
+            <button id="analyzeBtn">Analyze Data</button>
+            <canvas id="barChart"></canvas>
+        </section>
+
+        <section id="insights-section">
+            <h2>Generated Insights</h2>
+            <button id="generateInsightsBtn">Generate Insights</button>
+            <canvas id="pieChart"></canvas>
+        </section>
     </main>
     <footer>
-        <p>&copy; 2024 Social Media Analyzer</p>
+        <p>&copy; 2024 Social Media Analyzer | All Rights Reserved</p>
     </footer>
+    <script>
+        document.getElementById('dataUploadForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('File uploaded successfully!');
+            // Add logic to process the file.
+        });
+
+        document.getElementById('analyzeBtn').addEventListener('click', () => {
+            // Simulate data analysis
+            const barChartCtx = document.getElementById('barChart').getContext('2d');
+            new Chart(barChartCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Carousel', 'Reels', 'Static Images'],
+                    datasets: [{
+                        label: 'Average Engagement',
+                        data: [150, 300, 120], // Simulated data
+                        backgroundColor: ['#0073e6', '#00bfa5', '#ffcc00']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        }
+                    }
+                }
+            });
+        });
+
+        document.getElementById('generateInsightsBtn').addEventListener('click', () => {
+            // Simulate generating insights
+            const pieChartCtx = document.getElementById('pieChart').getContext('2d');
+            new Chart(pieChartCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Likes', 'Comments', 'Shares'],
+                    datasets: [{
+                        data: [50, 30, 20], // Simulated data
+                        backgroundColor: ['#0073e6', '#ff6f00', '#00bfa5']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
